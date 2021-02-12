@@ -3,6 +3,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/currency.js';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 async function convertCurrency(from,to,amount,currencyObject,storage) {
   const callTime = new Date();
@@ -15,7 +16,7 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
   if (currencyObject.nextUpdateTime < callTime && from in currencyObject.currencyConv) {
 
     if (to in currencyObject.currencyConv[from]) {
-      outputResults(currencyObject.currencyConv[from][to],amount,currencyObject);
+      outputResults(currencyObject.currencyConv[from][to],amount,to);
     } else {
       displayError(`The Currency of ${to} does not exist`);
     }
@@ -29,7 +30,7 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
         currencyObject.currencyConv[from] = response["conversion_rates"];
         storage.nextUpdateTime = JSON.stringify(response["time_next_update_unix"]);
         currencyObject.nextUpdateTime = response["time_next_update_unix"];
-        outputResults(currencyObject.currencyConv[from][to],amount,currencyObject);
+        outputResults(currencyObject.currencyConv[from][to],amount,to);
 
       } else {
         displayError(`The Currency of ${to} does not exist`);
@@ -40,8 +41,10 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
   }
 }
 
-function outputResults(output,amount) {
-  $("#output").html(parseFloat(output * amount));
+function outputResults(output,amount,to) {
+  console.log(getSymbolFromCurrency(to));
+  console.log(output*amount);
+  $("#output").html(`${getSymbolFromCurrency(to)}  ${(parseFloat(output * amount)).toFixed(2)}`);
 }
 
 function displayError(error) {
@@ -50,19 +53,21 @@ function displayError(error) {
 }
 
 function startAnimation() {
-  let element = document.getElementById("spinner")
+  let element = document.getElementById("spinner");
   element.classList.remove("spinnyboi");
   void element.offsetWidth;
   element.classList.add("spinnyboi");
 }
 
+
+//gets currency names available to API and outputs them to conversion selection
 function drawCurrentKeys(storage) {
   const keys = JSON.parse(storage.currency);
-  console.log(keys);
   let outputstring;
   keys.forEach(key => {
     outputstring += `<option value="${key}">${key}</option>`;
   });
+  outputstring += "<option value=`badbadbad`>Test for Error</option>";
   $("#from").html(outputstring);
   $("#to").html(outputstring);
 }
@@ -74,6 +79,8 @@ async function getCurrencyKeys(storage) {
 }
 
 
+
+
 function main() {
   let storage = window.sessionStorage;
   let currencyCall = new Currency;
@@ -83,7 +90,6 @@ function main() {
   } else {
     drawCurrentKeys(storage);
   }
-
 
   $("form").on("submit", function(event) {
     event.preventDefault();

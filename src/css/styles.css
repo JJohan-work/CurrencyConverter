@@ -99,12 +99,18 @@ form {
 
 #output {
   position: absolute;
+  left:50%;
+  bottom:20%;
+  transform: translate(-50%);
   text-align: center;
   background-color: floralwhite;
   width: fit-content;
   min-width: 50px;
-  height: 25px;
-  left:50%;
-  bottom:20%;
-  transform: translate(-50%);
+  height: fit-content;
+  min-height: 50px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 2em;
 }
