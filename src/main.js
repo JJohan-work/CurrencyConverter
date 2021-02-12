@@ -5,7 +5,7 @@ import './css/styles.css';
 import Currency from './js/currency.js';
 
 
-async function checkIfSaved(from,to,currencyObject,storage) {
+async function convertCurrency(from,to,amount,currencyObject,storage) {
   const callTime = new Date();
 
   if (storage[from]) {
@@ -15,32 +15,32 @@ async function checkIfSaved(from,to,currencyObject,storage) {
 
   if (currencyObject.nextUpdateTime < callTime && from in currencyObject.currencyConv) {
     console.log("read from memory");
-    outputResults(currencyObject.currencyConv[from][to]);
+    outputResults(currencyObject.currencyConv[from][to],amount);
   } else {
     console.log("make new call");
     const response = await Currency.makeAPICall(from);
-
-    storage[from] = JSON.stringify(response["conversion_rates"]);
-    currencyObject.currencyConv[from] = response["conversion_rates"];
-
-    storage.nextUpdateTime = JSON.stringify(response["time_next_update_unix"]);
-    currencyObject.nextUpdateTime = response["time_next_update_unix"];
-
-    outputResults(currencyObject.currencyConv[from][to]);
-
+    if (response.result == "success") {
+      storage[from] = JSON.stringify(response["conversion_rates"]);
+      currencyObject.currencyConv[from] = response["conversion_rates"];
+      storage.nextUpdateTime = JSON.stringify(response["time_next_update_unix"]);
+      currencyObject.nextUpdateTime = response["time_next_update_unix"];
+      outputResults(currencyObject.currencyConv[from][to],amount);
+    } else {
+      displayError(response);
+    }
   }
-  console.log(storage);
 }
 
 // function beginAnimation() {}
 
-function outputResults(output) {
-  $("#output").html(output);
+function outputResults(output,amount) {
+  $("#output").html(parseFloat(output * amount));
 }
 
-// function displayError(error) {
-//   $("#error").text(error);
-// }
+function displayError(error) {
+  $("#error").show();
+  $("#error").text(error);
+}
 
 
 
@@ -48,8 +48,9 @@ function main() {
   let storage = window.sessionStorage;
   let currencyCall = new Currency;
 
-  $("#testButton").on("click", function() {
-    checkIfSaved($("#from").val(),$("#to").val(),currencyCall,storage);
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    convertCurrency($("#from").val(),$("#to").val(),$("#amount").val(),currencyCall,storage);
   });
   
 }
