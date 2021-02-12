@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './js/currency.js';
 
-
 async function convertCurrency(from,to,amount,currencyObject,storage) {
   const callTime = new Date();
 
@@ -17,7 +16,7 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
 
     if (to in currencyObject.currencyConv[from]) {
       console.log("read from memory");
-      outputResults(currencyObject.currencyConv[from][to],amount);
+      outputResults(currencyObject.currencyConv[from][to],amount,currencyObject);
     } else {
       displayError(`The Currency of ${to} does not exist`);
     }
@@ -33,7 +32,7 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
         currencyObject.currencyConv[from] = response["conversion_rates"];
         storage.nextUpdateTime = JSON.stringify(response["time_next_update_unix"]);
         currencyObject.nextUpdateTime = response["time_next_update_unix"];
-        outputResults(currencyObject.currencyConv[from][to],amount);
+        outputResults(currencyObject.currencyConv[from][to],amount,currencyObject);
 
       } else {
         displayError(`The Currency of ${to} does not exist`);
@@ -44,9 +43,8 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
   }
 }
 
-// function beginAnimation() {}
-
 function outputResults(output,amount) {
+  stopAnimation();
   $("#output").html(parseFloat(output * amount));
 }
 
@@ -56,6 +54,14 @@ function displayError(error) {
   $("#eOutput").html(error);
 }
 
+function startAnimation() {
+  $("#spinner").removeClass("onlyOne");
+  $("#spinner").addClass("spinnyboi");
+}
+
+function stopAnimation() {
+  $("#spinner").addClass("onlyOne");
+}
 
 
 function main() {
@@ -64,6 +70,7 @@ function main() {
 
   $("form").on("submit", function(event) {
     event.preventDefault();
+    startAnimation();
     convertCurrency($("#from").val(),$("#to").val(),$("#amount").val(),currencyCall,storage);
   });
 

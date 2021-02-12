@@ -4,33 +4,44 @@
   <title>Currency</title>
 </head>
 <body>
-  <form>
-    <label for="amount">Enter Amount</label>
-    <input type="number" value="0" id="amount" min="0">
-    <select name="Currencies" id="from">
-      <option value="USD">USD</option>
-      <option value="ANG">ANG</option>
-      <option value="BBD">BBD</option>
-      <option value="NZD">NZD</option>
-      <option value="MMK">MMK</option>
-      <option value="IRR">IRR</option>
-      <option value="GGP">GGP</option>
-      <option value="BAD">BAD</option>
-    </select>
-    
-    <select name="Currencies" id="to">
-      <option value="USD">USD</option>
-      <option value="ANG">ANG</option>
-      <option value="BBD">BBD</option>
-      <option value="NZD">NZD</option>
-      <option value="MMK">MMK</option>
-      <option value="IRR">IRR</option>
-      <option value="GGP">GGP</option>
-      <option value="BAD">BAD</option>
-    </select>
-    <button type="submit" id="testButton">Test Me</button>
-  </form>
-  <p id="output"></p>
+  <div id="container">
+    <form>
+      <div id="amountBox">
+        <label for="amount">Enter Amount</label>
+        <input type="number" value="0" id="amount" min="0">
+      </div>
+      <div id="spinner">
+        <div>
+          <label for="from">From</label>
+          <select name="Currencies" id="from">
+            <option value="USD">USD</option>
+            <option value="ANG">ANG</option>
+            <option value="BBD">BBD</option>
+            <option value="NZD">NZD</option>
+            <option value="MMK">MMK</option>
+            <option value="IRR">IRR</option>
+            <option value="GGP">GGP</option>
+            <option value="BAD">BAD</option>
+          </select>
+        </div>
+        <div>
+          <label for="to">To</label>
+          <select name="Currencies" id="to">
+            <option value="USD">USD</option>
+            <option value="ANG">ANG</option>
+            <option value="BBD">BBD</option>
+            <option value="NZD">NZD</option>
+            <option value="MMK">MMK</option>
+            <option value="IRR">IRR</option>
+            <option value="GGP">GGP</option>
+            <option value="BAD">BAD</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" id="submitButton">Convert</button>
+    </form>
+    <p id="output"></p>
+  </div>
 
   <div id="error">
     <div id="eOutput"></div>

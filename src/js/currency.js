@@ -3,6 +3,7 @@ export default class CurrencyCall {
     this.currencyConv = {};
     this.currencyTypes;
     this.nextUpdateTime;
+    this.spin;
   }
 
   static async makeAPICall(from) {
