@@ -41,12 +41,12 @@
 .spinnyboi {
   animation-name: spinner;
   animation-duration: 2s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
 }
 
-.onlyOne {
+/* .onlyOne {
   animation-iteration-count: 1 !important;
-}
+} */
 
 #submitButton {
   position: absolute;

@@ -15,16 +15,13 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
   if (currencyObject.nextUpdateTime < callTime && from in currencyObject.currencyConv) {
 
     if (to in currencyObject.currencyConv[from]) {
-      console.log("read from memory");
       outputResults(currencyObject.currencyConv[from][to],amount,currencyObject);
     } else {
       displayError(`The Currency of ${to} does not exist`);
     }
 
   } else {
-    console.log("make new call");
     const response = await Currency.makeAPICall(from);
-    console.log(response);
     if (response.result == "success") {
 
       if (to in response.conversion_rates) {
@@ -44,29 +41,48 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
 }
 
 function outputResults(output,amount) {
-  stopAnimation();
   $("#output").html(parseFloat(output * amount));
 }
 
 function displayError(error) {
-  console.log(error);
   $("#error").show();
   $("#eOutput").html(error);
 }
 
 function startAnimation() {
-  $("#spinner").removeClass("onlyOne");
+  $("#spinner").removeClass("spinnyboi");
+  void $("#spinner").offsetWidth;
   $("#spinner").addClass("spinnyboi");
 }
 
-function stopAnimation() {
-  $("#spinner").addClass("onlyOne");
+function drawCurrentKeys(storage) {
+  const keys = JSON.parse(storage.currency);
+  console.log(keys);
+  let outputstring;
+  keys.forEach(key => {
+    outputstring += `<option value="${key}">${key}</option>`;
+  });
+  $("#from").html(outputstring);
+  $("#to").html(outputstring);
+}
+
+async function getCurrencyKeys(storage) {
+  const currency = await Currency.makeAPICall("USD");
+  storage.currency = JSON.stringify(Object.keys(currency.conversion_rates));
+  drawCurrentKeys(storage);
 }
 
 
 function main() {
   let storage = window.sessionStorage;
   let currencyCall = new Currency;
+
+  if (!storage.currency) {
+    getCurrencyKeys(storage);
+  } else {
+    drawCurrentKeys(storage);
+  }
+
 
   $("form").on("submit", function(event) {
     event.preventDefault();
