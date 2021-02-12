@@ -14,19 +14,32 @@ async function convertCurrency(from,to,amount,currencyObject,storage) {
   }
 
   if (currencyObject.nextUpdateTime < callTime && from in currencyObject.currencyConv) {
-    console.log("read from memory");
-    outputResults(currencyObject.currencyConv[from][to],amount);
+
+    if (to in currencyObject.currencyConv[from]) {
+      console.log("read from memory");
+      outputResults(currencyObject.currencyConv[from][to],amount);
+    } else {
+      displayError(`The Currency of ${to} does not exist`);
+    }
+
   } else {
     console.log("make new call");
     const response = await Currency.makeAPICall(from);
+    console.log(response);
     if (response.result == "success") {
-      storage[from] = JSON.stringify(response["conversion_rates"]);
-      currencyObject.currencyConv[from] = response["conversion_rates"];
-      storage.nextUpdateTime = JSON.stringify(response["time_next_update_unix"]);
-      currencyObject.nextUpdateTime = response["time_next_update_unix"];
-      outputResults(currencyObject.currencyConv[from][to],amount);
+
+      if (to in response.conversion_rates) {
+        storage[from] = JSON.stringify(response["conversion_rates"]);
+        currencyObject.currencyConv[from] = response["conversion_rates"];
+        storage.nextUpdateTime = JSON.stringify(response["time_next_update_unix"]);
+        currencyObject.nextUpdateTime = response["time_next_update_unix"];
+        outputResults(currencyObject.currencyConv[from][to],amount);
+
+      } else {
+        displayError(`The Currency of ${to} does not exist`);
+      }
     } else {
-      displayError(response);
+      displayError(`${response["error-type"]}. The Currency of ${from} may not exist or an error has occured in the API`);
     }
   }
 }
@@ -38,8 +51,9 @@ function outputResults(output,amount) {
 }
 
 function displayError(error) {
+  console.log(error);
   $("#error").show();
-  $("#error").text(error);
+  $("#eOutput").html(error);
 }
 
 
@@ -51,6 +65,10 @@ function main() {
   $("form").on("submit", function(event) {
     event.preventDefault();
     convertCurrency($("#from").val(),$("#to").val(),$("#amount").val(),currencyCall,storage);
+  });
+
+  $("#acceptError").on("click", function() {
+    $("#error").hide();
   });
   
 }

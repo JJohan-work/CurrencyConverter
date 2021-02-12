@@ -6,7 +6,7 @@
 <body>
   <form>
     <label for="amount">Enter Amount</label>
-    <input type="number" value="0" id="amount">
+    <input type="number" value="0" id="amount" min="0">
     <select name="Currencies" id="from">
       <option value="USD">USD</option>
       <option value="ANG">ANG</option>
@@ -15,6 +15,7 @@
       <option value="MMK">MMK</option>
       <option value="IRR">IRR</option>
       <option value="GGP">GGP</option>
+      <option value="BAD">BAD</option>
     </select>
     
     <select name="Currencies" id="to">
@@ -25,11 +26,16 @@
       <option value="MMK">MMK</option>
       <option value="IRR">IRR</option>
       <option value="GGP">GGP</option>
+      <option value="BAD">BAD</option>
     </select>
     <button type="submit" id="testButton">Test Me</button>
   </form>
   <p id="output"></p>
 
-  <div id="error">You Shouldnt be able to see this text.</div>
+  <div id="error">
+    <div id="eOutput"></div>
+    <p>Please try Again</p>
+    <button id="acceptError">Ok</button>
+  </div>
 </body>
 </html>

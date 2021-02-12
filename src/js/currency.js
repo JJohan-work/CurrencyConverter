@@ -9,7 +9,7 @@ export default class CurrencyCall {
     try {
       const response  = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/${from}`);
       if (!response.ok){
-        throw Error(response.status);
+        throw Error(response.json());
       }
       return response.json();
     } catch (error) {
