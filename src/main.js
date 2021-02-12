@@ -50,9 +50,10 @@ function displayError(error) {
 }
 
 function startAnimation() {
-  $("#spinner").removeClass("spinnyboi");
-  void $("#spinner").offsetWidth;
-  $("#spinner").addClass("spinnyboi");
+  let element = document.getElementById("spinner")
+  element.classList.remove("spinnyboi");
+  void element.offsetWidth;
+  element.classList.add("spinnyboi");
 }
 
 function drawCurrentKeys(storage) {

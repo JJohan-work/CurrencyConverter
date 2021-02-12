@@ -10,32 +10,34 @@
         <label for="amount">Enter Amount</label>
         <input type="number" value="0" id="amount" min="0">
       </div>
-      <div id="spinner">
-        <div>
-          <label for="from">From</label>
-          <select name="Currencies" id="from">
-            <option value="USD">USD</option>
-            <option value="ANG">ANG</option>
-            <option value="BBD">BBD</option>
-            <option value="NZD">NZD</option>
-            <option value="MMK">MMK</option>
-            <option value="IRR">IRR</option>
-            <option value="GGP">GGP</option>
-            <option value="BAD">BAD</option>
-          </select>
-        </div>
-        <div>
-          <label for="to">To</label>
-          <select name="Currencies" id="to">
-            <option value="USD">USD</option>
-            <option value="ANG">ANG</option>
-            <option value="BBD">BBD</option>
-            <option value="NZD">NZD</option>
-            <option value="MMK">MMK</option>
-            <option value="IRR">IRR</option>
-            <option value="GGP">GGP</option>
-            <option value="BAD">BAD</option>
-          </select>
+      <div id="spinPos">
+        <div id="spinner">
+          <div>
+            <label for="from">From</label>
+            <select name="Currencies" id="from">
+              <option value="USD">USD</option>
+              <option value="ANG">ANG</option>
+              <option value="BBD">BBD</option>
+              <option value="NZD">NZD</option>
+              <option value="MMK">MMK</option>
+              <option value="IRR">IRR</option>
+              <option value="GGP">GGP</option>
+              <option value="BAD">BAD</option>
+            </select>
+          </div>
+          <div>
+            <label for="to">To</label>
+            <select name="Currencies" id="to">
+              <option value="USD">USD</option>
+              <option value="ANG">ANG</option>
+              <option value="BBD">BBD</option>
+              <option value="NZD">NZD</option>
+              <option value="MMK">MMK</option>
+              <option value="IRR">IRR</option>
+              <option value="GGP">GGP</option>
+              <option value="BAD">BAD</option>
+            </select>
+          </div>
         </div>
       </div>
       <button type="submit" id="submitButton">Convert</button>
@@ -44,7 +46,7 @@
   </div>
 
   <div id="error">
-    <div id="eOutput"></div>
+    <div id="eOutput">20</div>
     <p>Please try Again</p>
     <button id="acceptError">Ok</button>
   </div>

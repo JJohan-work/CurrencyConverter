@@ -1,27 +1,48 @@
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
 #error {
   display: none;
 }
 
+form {
+  height:30vh;
+}
+
 #container {
+  position: relative;
   background-color: aquamarine;
-  height:60vh;
-  width: 60vw;
+  height:80vh;
+  width: 80vw;
+  min-height: 500px;
+  min-width: 500px;
   margin: auto;
+  margin-top: 10vh;
+  border-radius: 50px;
+  border:2px solid black;
+  overflow: hidden;
 }
 
 #amountBox {
   margin-left:auto;
   margin-right: auto;
+  margin-top:50px;
   width:50%;
   display: flex;
   flex-direction: column;
   text-align: center;
+  border-radius: 25px;
+  border: 2px solid black;
+  padding-bottom: 10px;
 }
 
 #amountBox>* {
   width:50%;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
 }
 
 @keyframes spinner {
@@ -29,13 +50,34 @@
   to {transform:rotate(360deg);}
 }
 
+#spinPos {
+  position: absolute;
+  left: 50%;
+  bottom:45%;
+  transform:translate(-50%,-25%);
+  min-width: 500px;
+  max-width: 40%;
+}
+
 #spinner {
-  margin-left:auto;
-  margin-right: auto;
-  margin-top: 10%;
-  width:50%;
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+#spinner>* {
+  background-color:floralwhite;
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  width:150px;
+}
+
+#from, #to {
+  background-color: floralwhite;
+  outline: none;
+  overflow: hidden;
 }
 
 .spinnyboi {
@@ -44,15 +86,25 @@
   animation-iteration-count: 1;
 }
 
-/* .onlyOne {
-  animation-iteration-count: 1 !important;
-} */
 
 #submitButton {
   position: absolute;
   left: 50%;
+  top:45%;
   -ms-transform: translate(-50%);
   transform: translate(-50%);
   margin-right: auto;
   margin-left: auto;
+}
+
+#output {
+  position: absolute;
+  text-align: center;
+  background-color: floralwhite;
+  width: fit-content;
+  min-width: 50px;
+  height: 25px;
+  left:50%;
+  bottom:20%;
+  transform: translate(-50%);
 }
