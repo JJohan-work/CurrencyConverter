@@ -33,10 +33,13 @@ This Application converts a selected currency to anouther selected currency. It 
 * Start Live Server by running ```npm run start``` in the terminal
 
 * * *
+
 ## Known Bugs
 
 * _Any known issues_
 * _should go here_
+
+* * *
 
 ## License:
 > *&copy; Jonah Johansen, 2021*
