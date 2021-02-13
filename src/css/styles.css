@@ -3,10 +3,6 @@ body {
   margin: 0px;
 }
 
-#error {
-  display: none;
-}
-
 form {
   height:30vh;
 }
@@ -70,6 +66,7 @@ form {
   background-color:floralwhite;
   padding: 10px;
   border-radius: 20px;
+  border: 2px solid black;
   text-align: center;
   width:150px;
 }
@@ -113,4 +110,21 @@ form {
   border: 2px solid black;
   border-radius: 10px;
   font-size: 2em;
+}
+
+#error {
+  display: none;
+  position: absolute;
+  left:50vw;
+  bottom:50vh;
+  background-color: floralwhite;
+  width:60vw;
+  height:60vh;
+  min-height: 500px;
+  min-width: 500px;
+  transform: translate(-50%,50%);
+  border: 2px solid black;
+  border-radius: 50px;
+  text-align: center;
+  padding-top: 10vh;
 }
