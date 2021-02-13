@@ -1,6 +1,6 @@
 # Currency Converter
 
-#### Convert currencies to currencies
+#### Convert currencies to currencies. Epicodus project 6
 
 #### By Jonah Johansen
 
@@ -22,23 +22,21 @@
 * * *
 
 ## Description
-This Application converts a selected currency to anouther selected currency. It makes an API call to the ExchangeRate-API for information.
+This Application converts a selected currency to anouther selected currency. It makes an API call to the ExchangeRate-API for information. It contains error handling for currencies that arent contained in the repo and for if the api fails. When a conversion is made the conversion table is saved in session memory and only will make a call again if a new price table is released on the api or the memory is lost. A npm package called [currency-symbol-map](https://github.com/bengourley/currency-symbol-map) is used to convert the currency names from the API to their associated symbols.
 
 * * *
 
 ## Setup/Installation Requirements
-
-### Npm Initilization
+Clone or Download [this repository](https://github.com/JJohan-work/CurrencyConverter.git)
 * Run ```npm install```
-* Start Live Server by running ```npm run start``` in the terminal
+An API key is needed for this program to execute, create a file named ```.env``` and paste ```API_KEY={YOUR API KEY}``` where ```{YOUR API KEY}``` is a key made from creating an account at [ExchangeRate-API](https://www.exchangerate-api.com)
+* Start Live Server by running ```npm run start``` in the terminal or ```npm run build``` to get dist folder.
+If live server does not start after running ```npm run start``` or you are using ```npm run build``` open ```dist/index.html``` to access webpage
 
 * * *
 
 ## Known Bugs
-
-* _Any known issues_
-* _should go here_
-
+* _if bug is found contact at email below_
 * * *
 
 ## License:
@@ -48,7 +46,6 @@ This Application converts a selected currency to anouther selected currency. It 
 
 ## Addition comments:
 * Created on 2/12/21  
-* Currently in development and unfinished (*as of 2/12/21*)
 
 * * *
 
