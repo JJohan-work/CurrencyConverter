@@ -7,6 +7,16 @@ form {
   height:30vh;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+h1 {
+  text-align: center;
+}
+
 #container {
   position: relative;
   background-color: aquamarine;
@@ -15,7 +25,6 @@ form {
   min-height: 500px;
   min-width: 500px;
   margin: auto;
-  margin-top: 10vh;
   border-radius: 50px;
   border:2px solid black;
   overflow: hidden;
@@ -41,9 +50,31 @@ form {
   text-align: center;
 }
 
+#amount {
+  border-radius: 50px;
+  outline: none;
+  overflow: hidden;
+}
+
+#submitButton {
+  position: absolute;
+  left: 50%;
+  top:45%;
+  height:40px;
+  width:100px;
+  -ms-transform: translate(-50%,-25%);
+  transform: translate(-50%,-20px);
+  margin-right: auto;
+  margin-left: auto;
+  outline: hidden;
+  border: 2px solid black;
+  border-radius: 50px;
+}
+
 @keyframes spinner {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
+  0% {transform:rotate(0deg); pointer-events: none;}
+  99% {transform:rotate(360deg); pointer-events: none;}
+  100% {transform:rotate(360deg); pointer-events: all;}
 }
 
 #spinPos {
@@ -83,16 +114,6 @@ form {
   animation-iteration-count: 1;
 }
 
-
-#submitButton {
-  position: absolute;
-  left: 50%;
-  top:45%;
-  -ms-transform: translate(-50%);
-  transform: translate(-50%);
-  margin-right: auto;
-  margin-left: auto;
-}
 
 #output {
   position: absolute;
