@@ -40,16 +40,12 @@ If live server does not start after running ```npm run start``` or you are using
 * * *
 
 ## License:
-> *&copy; Jonah Johansen, 2021*
+> *&copy; Jonah Johansen, 2021* Licensed under [MIT license](https://mit-license.org/)
 
 * * *
 
 ## Addition comments:
 * Created on 2/12/21  
-
-* * *
-
-Licensed under [MIT license](https://mit-license.org/)
 
 * * *
 
