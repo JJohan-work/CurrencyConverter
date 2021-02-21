@@ -54,4 +54,4 @@ Licensed under [MIT license](https://mit-license.org/)
 * * *
 
 ## Contact Information
-_Jonah Johansen: [Email](johansenjonah+git@gmail.com)
+_Jonah Johansen: [Email](johansenjonah+git@gmail.com)_
